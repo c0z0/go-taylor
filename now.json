@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "alias": "taylor.cserdean.com",
+  "builds": [
+    {
+      "src": "api/calculate.go",
+      "use": "@now/go"
+    },
+    {
+      "src": "www/package.json",
+      "use": "@now/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.+)",
+      "dest": "api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "www/$1",
+      "headers": { "cache-control": "s-maxage=60, stale-while-revalidate" }
+    }
+  ]
+}
